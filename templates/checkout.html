@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout | E-Shop{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3 class="mb-4">💳 Checkout</h3>
+
+    <div class="row">
+
+        <!-- LEFT: PRODUCT -->
+        <div class="col-lg-7">
+            <div class="card p-3 mb-3">
+                <div class="row align-items-center">
+
+                    <div class="col-md-4 text-center">
+                        <img src="{{ url_for('static', filename='images/' ~ product.image) }}" class="img-fluid"
+                            style="max-height:150px;">
+                    </div>
+
+                    <div class="col-md-8">
+                        <h5>{{ product.name }}</h5>
+                        <p class="text-success">₹{{ product.price }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-5">
+
+            <div class="card p-3 shadow-sm">
+
+                <h5>Delivery Address</h5>
+
+                <textarea id="address" class="form-control mb-3" placeholder="Enter your full address"
+                    required></textarea>
+
+                <h5>Total: ₹{{ product.price }}</h5>
+
+                <!-- PAY BUTTON -->
+                <button id="pay-btn" class="btn btn-success w-100 mt-3">
+                    Pay with Razorpay
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RAZORPAY -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    var options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ amount }}",
+        "currency": "INR",
+        "name": "E-Shop",
+        "description": "Order Payment",
+        "order_id": "{{ order_id }}",
+
+        "handler": function (response) {
+
+            var address = document.getElementById('address').value;
+
+            if (!address) {
+                alert("Please enter delivery address");
+                return;
+            }
+
+            window.location.href =
+                "/payment_success?payment_id=" + response.razorpay_payment_id +
+                "&product_id={{ product.id }}" +
+                "&amount=100" +   // 🔥 must match backend test amount
+                "&address=" + encodeURIComponent(address);
+        },
+
+        "prefill": {
+            "name": "{{ session.get('username', 'Customer') }}",
+            "email": "test@gmail.com",
+            "contact": "9999999999"
+        },
+
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById('pay-btn').onclick = function (e) {
+        rzp.open();
+        e.preventDefault();
+    }
+</script>
+
+{% endblock %}

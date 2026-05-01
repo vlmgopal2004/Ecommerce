@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Register | E-Shop{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card shadow-lg animate__animated animate__fadeInUp">
+
+    <h3 class="auth-title">Create Account 🚀</h3>
+    <p class="auth-subtitle">Join E-Shop today</p>
+
+    <form method="POST">
+
+      <div class="form-floating mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
+        <label>Username</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+        <label>Email</label>
+      </div>
+
+      <div class="form-floating mb-3 position-relative">
+        <input type="password" name="password" class="form-control" id="regPassword" placeholder="Password" required>
+        <label>Password</label>
+        <i class="bi bi-eye-slash toggle-password" onclick="togglePassword('regPassword', this)"></i>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" name="phonenumber" class="form-control" placeholder="Phone">
+        <label>Phone Number</label>
+      </div>
+
+      <div class="mb-3">
+        <select class="form-select" name="gender">
+          <option value="">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button class="btn btn-success w-100 auth-btn">
+        Create Account
+      </button>
+
+      <p class="text-center mt-3">
+        Already registered?
+        <a href="/login" class="auth-link fw-semibold">Login</a>
+      </p>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

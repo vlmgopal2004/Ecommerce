@@ -1,0 +1,105 @@
+/* ================= DASHBOARD ================= */
+
+.dashboard-header h2 {
+    color: #212529;
+}
+
+.dashboard-header p {
+    font-size: 0.95rem;
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.product-card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+}
+
+/* ================= IMAGE ================= */
+
+.product-img {
+    height: 210px;
+    object-fit: contain;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+/* ================= FAVORITE ================= */
+
+.favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.favorite-btn i {
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.favorite-btn.active i {
+    color: #e63946;
+}
+
+/* ================= TEXT ================= */
+
+.brand-name {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+.price-box {
+    margin-bottom: 6px;
+}
+
+.final-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #198754;
+}
+
+.old-price {
+    font-size: 0.85rem;
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 6px;
+}
+
+/* ================= META ================= */
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.status.active {
+    color: #198754;
+}
+
+.status.out_of_stock {
+    color: #dc3545;
+}
+
+.status.discontinued {
+    color: #6c757d;
+}

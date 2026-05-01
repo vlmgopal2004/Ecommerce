@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    padding-top: 72px;
+}
+
+/* NAVBAR */
+.eshop-navbar {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1030;
+}
+
+.search-form {
+    max-width: 520px;
+    width: 100%;
+}
+
+.search-input {
+    border-radius: 30px 0 0 30px;
+    border: none;
+}
+
+.search-btn {
+    border-radius: 0 30px 30px 0;
+    background: #ff9f00;
+    color: white;
+    border: none;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    background: #ff3d00;
+    color: white;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        padding: 15px;
+        border-radius: 0 0 16px 16px;
+    }
+}
+/* Fix the search form on mobile so it doesn't crowd the buttons */
+@media (max-width: 991px) {
+    .search-form {
+        margin-bottom: 15px;
+    }
+    
+    /* Ensure dropdown menu text is readable */
+    .dropdown-menu {
+        border: none;
+        margin-top: 10px;
+    }
+}
+
+/* Ensure the Login/Sign up buttons have enough space */
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+}

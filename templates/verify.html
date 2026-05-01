@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}OTP Verification | E-Shop{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+<style>
+  .resend-text {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card shadow-lg">
+
+    <h3 class="auth-title">OTP Verification 🔑</h3>
+    <p class="auth-subtitle">Check your email</p>
+
+    <form method="POST">
+      <div class="form-floating mb-3">
+        <input type="text" name="otp" class="form-control" placeholder="OTP" required autofocus>
+        <label>Enter OTP</label>
+      </div>
+
+      <button class="btn btn-success w-100 auth-btn">Verify OTP</button>
+    </form>
+
+    <div class="resend-text">
+      Didn't receive the code? <br>
+      <a href="{{ url_for('resend_otp') }}" class="text-decoration-none fw-bold">Resend OTP</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

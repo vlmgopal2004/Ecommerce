@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | E-Shop{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= DASHBOARD HEADER ================= -->
+<section class="dashboard-header text-center mb-4">
+    <h2 class="fw-bold">Trending Products 🔥</h2>
+    <p class="text-muted">Discover products customers love</p>
+</section>
+
+<!-- ================= PRODUCT GRID ================= -->
+<div class="row g-4">
+
+    {% for product in products %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+        <div class="card product-card h-100">
+
+            <!-- BEST SELLER -->
+            {% if product.best_seller %}
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                Best Seller
+            </span>
+            {% endif %}
+
+            <!-- FAVORITE -->
+            <button class="favorite-btn" onclick="event.preventDefault(); toggleFavorite(this)">
+                <i class="bi bi-heart"></i>
+            </button>
+
+            <!-- IMAGE CLICKABLE -->
+            <a href="{{ url_for('product_details', product_id=product.id) }}">
+                <img src="{{ url_for('static', filename='images/' ~ product.image) }}"
+                     class="card-img-top product-img"
+                     alt="{{ product.name }}">
+            </a>
+
+            <!-- CARD BODY -->
+            <div class="card-body">
+
+                <!-- TITLE CLICKABLE -->
+                <a href="{{ url_for('product_details', product_id=product.id) }}"
+                   class="text-decoration-none text-dark">
+                    <h6 class="card-title text-truncate" title="{{ product.name }}">
+                        {{ product.name }}
+                    </h6>
+                </a>
+
+                <p class="brand-name">{{ product.brand }}</p>
+
+                <!-- PRICE -->
+                <div class="price-box">
+                    <span class="final-price">
+                        ₹{{ (product.price - (product.price * product.discount / 100)) | round(2) }}
+                    </span>
+
+                    {% if product.discount > 0 %}
+                    <span class="old-price">₹{{ product.price }}</span>
+                    {% endif %}
+                </div>
+
+                <!-- META -->
+                <div class="meta-info">
+                    <span class="rating">⭐ {{ product.rating }}</span>
+                    <span class="status {{ product.status }}">
+                        {{ product.status.replace('_', ' ').title() }}
+                    </span>
+                </div>
+
+                <!-- ADD TO CART -->
+                <div class="d-grid mt-2">
+                    {% if product.status == 'out_of_stock' %}
+                        <button class="btn btn-secondary btn-sm" disabled>
+                            Out of Stock
+                        </button>
+                    {% else %}
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+                           class="btn btn-warning btn-sm">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}My Cart | E-Shop{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3 class="mb-4">🛒 My Cart</h3>
+
+    {% if cart_items %}
+
+    <div class="row">
+
+        <!-- LEFT: ITEMS -->
+        <div class="col-lg-8">
+
+            {% for item in cart_items %}
+            <div class="card mb-3 p-3">
+
+                <div class="row g-3 align-items-center">
+
+                    <!-- IMAGE -->
+                    <div class="col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='images/' ~ item.image) }}"
+                             class="img-fluid"
+                             style="max-height:120px;">
+                    </div>
+
+                    <!-- DETAILS -->
+                    <div class="col-md-5">
+                        <h6>{{ item.name }}</h6>
+                        <p class="text-success mb-1">₹{{ item.price }}</p>
+
+                        {% if item.status == 'out_of_stock' %}
+                        <span class="text-danger">Out of Stock</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- QUANTITY (FINAL CLEAN VERSION) -->
+                    <div class="col-md-4 text-center">
+
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+
+                            <!-- DECREASE -->
+                            <a href="{{ url_for('update_quantity', cart_id=item.cart_id, action='decrease') }}"
+                               class="btn btn-outline-secondary btn-sm qty-btn">
+                                -
+                            </a>
+
+                            <!-- QUANTITY -->
+                            <span class="fw-bold">{{ item.quantity }}</span>
+
+                            <!-- INCREASE -->
+                            <a href="{{ url_for('update_quantity', cart_id=item.cart_id, action='increase') }}"
+                               class="btn btn-outline-secondary btn-sm qty-btn">
+                                +
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- RIGHT: PRICE DETAILS -->
+        <div class="col-lg-4">
+
+            <div class="card p-3 shadow-sm">
+
+                <h5>Price Details</h5>
+                <hr>
+
+                <p>Total Items: {{ cart_items|length }}</p>
+
+                <h5 class="text-success">Total: ₹{{ total_price }}</h5>
+
+                <a href="#" class="btn btn-warning w-100 mt-3">
+                    Proceed to Checkout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY CART -->
+    <div class="text-center mt-5">
+        <h4>Your cart is empty 🛒</h4>
+        <a href="/" class="btn btn-primary mt-3">Continue Shopping</a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

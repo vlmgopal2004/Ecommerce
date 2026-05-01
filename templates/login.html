@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Login | E-Shop{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card shadow-lg animate__animated animate__fadeInDown">
+
+    <h3 class="auth-title">Welcome Back 👋</h3>
+    <p class="auth-subtitle">Login to your account</p>
+
+    <form method="POST">
+
+      <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+        <label>Email</label>
+      </div>
+
+      <div class="form-floating mb-3 position-relative">
+        <input type="password" name="password" class="form-control" id="loginPassword" placeholder="Password" required>
+        <label>Password</label>
+        <i class="bi bi-eye-slash toggle-password" onclick="togglePassword('loginPassword', this)"></i>
+      </div>
+
+      <button class="btn btn-primary w-100 auth-btn">
+        Login
+      </button>
+
+      <p class="text-center mt-3">
+        <a href="/forgotpassword" class="auth-link fw-semibold">Forgot Password?</a>
+      </p>
+
+      <p class="text-center mt-2">
+        Don't have an account? 
+        <a href="/register" class="auth-link fw-semibold">Register</a>
+      </p>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
