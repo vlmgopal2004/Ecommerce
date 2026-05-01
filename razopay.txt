@@ -1,0 +1,9 @@
+pip install jaraco.text
+pip install platformdirs
+pip install razorpay
+
+
+
+Test API Key:  rzp_test_Rn24fP1HWd2Zb6
+
+Test Key Secret:  rR5ZAwhYTfNfJNzQqMeGZ5yQ
